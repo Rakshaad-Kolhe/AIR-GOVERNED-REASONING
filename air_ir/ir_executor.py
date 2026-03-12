@@ -3,6 +3,10 @@ from air_runtime.failure_detector import FailureDetector
 from air_runtime.repair_engine import RepairEngine
 from air_trace.trace_graph import TraceGraph
 
+# NEW IMPORTS
+from air_constraints.constraint_library import ConstraintLibrary
+from air_constraints.constraint_extractor import ConstraintExtractor
+
 
 class AIRExecutor:
     def __init__(self):
@@ -11,9 +15,14 @@ class AIRExecutor:
         self.repair_engine = RepairEngine()
         self.trace_graph = TraceGraph()
 
+        # NEW COMPONENTS
+        self.constraint_library = ConstraintLibrary()
+        self.constraint_extractor = ConstraintExtractor()
+
     def execute(self, kb, steps):
         self.trace_graph = TraceGraph()
         steps = steps or []
+
         if not steps:
             return {
                 "status": "SUSPEND",
@@ -29,8 +38,11 @@ class AIRExecutor:
 
         for step in steps:
             rule = step.to_rule()
+
             result = self.engine.evaluate(kb, [rule])
+
             self.trace_graph.add_step(step, result)
+
             steps_evaluated += 1
             final_result = result
 
@@ -38,8 +50,17 @@ class AIRExecutor:
                 kb.add_fact(step.conclusion, source="inference")
 
             if result.get("status") == "REJECT":
+
                 failure = self.failure_detector.detect(step, result)
+
                 repair = self.repair_engine.suggest(failure) if failure else None
+
+                # NEW: extract constraint from failure
+                constraint = self.constraint_extractor.extract(step, failure)
+
+                if constraint:
+                    self.constraint_library.add(constraint)
+
                 return {
                     "status": result.get("status"),
                     "rule": result.get("rule"),
