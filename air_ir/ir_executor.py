@@ -29,6 +29,9 @@ class AIRExecutor:
             steps_evaluated += 1
             final_result = result
 
+            if result.get("status") == "ACCEPT" and getattr(step, "conclusion", None):
+                kb.add_fact(step.conclusion, source="inference")
+
             if result.get("status") == "REJECT":
                 failure = self.failure_detector.detect(step, result)
                 repair = self.repair_engine.suggest(failure) if failure else None
