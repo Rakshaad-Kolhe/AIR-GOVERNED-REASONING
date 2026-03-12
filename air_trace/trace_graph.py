@@ -1,4 +1,4 @@
-class TraceGraph:
+﻿class TraceGraph:
     def __init__(self):
         self.nodes = []
 
@@ -20,3 +20,11 @@ class TraceGraph:
         return {
             "reasoning_trace": self.nodes,
         }
+
+    def add_constraint(self, constraints):
+        self.nodes.append(
+            {
+                "type": "constraint",
+                "constraints": constraints,
+            }
+        )
