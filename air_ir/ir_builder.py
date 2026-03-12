@@ -1,8 +1,15 @@
 from air_ir.ir_step import AIRStep
+from air_ir.formal_ir import FormalAIRStep
 
 
 class AIRIRBuilder:
-    def build(self, graph):
+    def __init__(self, include_formal=False):
+        self.include_formal = include_formal
+
+    def build(self, graph, include_formal=None):
+        if include_formal is None:
+            include_formal = self.include_formal
+
         premises = graph.get_premises() or []
         rules = graph.get_rules() or []
         conclusions = graph.get_conclusions() or []
@@ -22,6 +29,12 @@ class AIRIRBuilder:
                 exceptions=[],
                 status="proposed",
             )
+            if include_formal:
+                step.formal = FormalAIRStep(
+                    premise_values,
+                    self._node_value(rule),
+                    conclusion_value,
+                )
             steps.append(step)
 
         return steps
