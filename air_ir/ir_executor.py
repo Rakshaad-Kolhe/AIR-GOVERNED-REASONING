@@ -40,6 +40,24 @@ class AIRExecutor:
             constraints = self.constraint_library.match(step.premises)
             if constraints:
                 self.trace_graph.add_constraint(constraints)
+                result = {
+                    "status": "REJECT",
+                    "rule": step.operator,
+                    "constraint_triggered": True,
+                    "constraints": constraints,
+                }
+                self.trace_graph.add_step(step, result)
+
+                steps_evaluated += 1
+
+                return {
+                    "status": "REJECT",
+                    "rule": step.operator,
+                    "steps_evaluated": steps_evaluated,
+                    "failure": {"error_type": "constraint_violation"},
+                    "repair": None,
+                    "reasoning_trace": self.trace_graph.get_trace(),
+                }
                 
             rule = step.to_rule()
 
