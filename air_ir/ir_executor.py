@@ -37,6 +37,10 @@ class AIRExecutor:
         final_result = None
 
         for step in steps:
+            constraints = self.constraint_library.match(step.premises)
+            if constraints:
+                self.trace_graph.add_constraint(constraints)
+                
             rule = step.to_rule()
 
             result = self.engine.evaluate(kb, [rule])
