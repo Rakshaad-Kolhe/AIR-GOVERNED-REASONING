@@ -1,6 +1,7 @@
 from api.schema import ReasoningResponse
+from air_ir.ir_builder import AIRIRBuilder
+from air_ir.ir_executor import AIRExecutor
 from extractor.reasoning_extractor import ReasoningExtractor
-from governance.eal_engine import EALEngine
 from knowledge.knowledge_base import KnowledgeBase
 from llm.reasoning_generator import ReasoningGenerator
 from trace.trace_generator import TraceGenerator
@@ -9,7 +10,8 @@ from trace.trace_generator import TraceGenerator
 def process_question(question):
     generator = ReasoningGenerator()
     extractor = ReasoningExtractor()
-    engine = EALEngine()
+    builder = AIRIRBuilder()
+    executor = AIRExecutor()
     tracer = TraceGenerator()
     kb = KnowledgeBase()
 
@@ -21,23 +23,11 @@ def process_question(question):
     graph = extractor.extract_graph(reasoning_text)
     tracer.add_step("Extracted AIR graph from reasoning text.")
 
-    conclusions = [node.value for node in graph.get_conclusions()]
+    steps = builder.build(graph)
 
-    rules = []
-    for node in graph.get_rules():
-        rules.append(
-            {
-                "name": node.value,
-                "conditions": [],
-                "conclusion": conclusions[0] if conclusions else None,
-                "priority": 1,
-                "type": "general",
-            }
-        )
+    tracer.add_step(f"Extracted {len(steps)} rules from AIR graph.")
 
-    tracer.add_step(f"Extracted {len(rules)} rules from AIR graph.")
-
-    result = engine.evaluate(kb, rules)
+    result = executor.execute(kb, steps)
     tracer.add_step(f"Evaluated rules with EALEngine: {result.get('status')}.")
 
     trace = tracer.get_trace()
