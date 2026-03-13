@@ -1,4 +1,6 @@
-﻿from air_evaluation.metrics import AIRMetrics
+from air_analytics.constraint_stats import ConstraintStats
+from air_constraints.constraint_library import ConstraintLibrary
+from air_evaluation.metrics import AIRMetrics
 from air_evaluation.verifier_benchmark import VerifierBenchmark
 from air_ir.ir_builder import AIRIRBuilder
 from air_ir.ir_executor import AIRExecutor
@@ -40,6 +42,10 @@ def main():
 
     print("AIR Benchmark Results:")
     print(results)
+
+    constraint_library = ConstraintLibrary()
+    stats = ConstraintStats(constraint_library)
+    stats.print_report()
 
 
 if __name__ == "__main__":
