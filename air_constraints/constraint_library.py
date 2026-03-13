@@ -1,5 +1,10 @@
+import json
+import os
+
+
 class ConstraintLibrary:
     def __init__(self):
+        self.storage_file = "constraints.json"
         self.constraints = []
         self.hierarchy = {
             "hypertension": "medical_condition",
@@ -7,9 +12,22 @@ class ConstraintLibrary:
             "aspirin": "medication",
         }
 
+        if os.path.exists(self.storage_file):
+            try:
+                with open(self.storage_file, "r") as f:
+                    loaded = json.load(f)
+                self.constraints = loaded if isinstance(loaded, list) else []
+            except Exception:
+                self.constraints = []
+
     def add(self, constraint):
         if constraint is not None:
             self.constraints.append(constraint)
+            try:
+                with open(self.storage_file, "w") as f:
+                    json.dump(self.constraints, f, indent=2)
+            except Exception:
+                pass
 
     def get_all(self):
         return list(self.constraints)
