@@ -41,15 +41,21 @@ class AIRExecutor:
         final_result = None
 
         for step in steps:
+
+            # --------------------------------------------------
+            # Check learned constraints first
+            # --------------------------------------------------
             constraints = self.constraint_library.match(step.premises)
             if constraints:
                 self.trace_graph.add_constraint(constraints)
+
                 result = {
                     "status": "REJECT",
                     "rule": step.operator,
                     "constraint_triggered": True,
                     "constraints": constraints,
                 }
+
                 self.trace_graph.add_step(step, result)
 
                 steps_evaluated += 1
@@ -63,7 +69,13 @@ class AIRExecutor:
                     "reasoning_trace": self.trace_graph.get_trace(),
                 }
 
+            # --------------------------------------------------
+            # Admissibility Check (FIXED: now triggers learning)
+            # --------------------------------------------------
             if not self.admissibility_checker.check(step, kb):
+
+                failure = {"error_type": "inadmissible_reasoning"}
+
                 result = {
                     "status": "REJECT",
                     "rule": step.operator,
@@ -72,17 +84,30 @@ class AIRExecutor:
 
                 self.trace_graph.add_step(step, result)
 
+                # NEW: allow constraint learning from inadmissible reasoning
+                constraint = self.constraint_extractor.extract(step, failure)
+
+                if constraint:
+                    generalized_constraint = self.constraint_generalizer.generalize(constraint)
+
+                    if generalized_constraint:
+                        self.constraint_library.add(generalized_constraint)
+
+                steps_evaluated += 1
+
                 return {
                     "status": "REJECT",
                     "rule": step.operator,
                     "steps_evaluated": steps_evaluated,
-                    "failure": {"error_type": "inadmissible_reasoning"},
+                    "failure": failure,
                     "repair": None,
                     "reasoning_trace": self.trace_graph.get_trace(),
                 }
 
+            # --------------------------------------------------
+            # Normal EAL evaluation
+            # --------------------------------------------------
             rule = step.to_rule()
-
             result = self.engine.evaluate(kb, [rule])
 
             self.trace_graph.add_step(step, result)
@@ -96,12 +121,9 @@ class AIRExecutor:
             if result.get("status") == "REJECT":
 
                 failure = self.failure_detector.detect(step, result)
-
                 repair = self.repair_engine.suggest(failure) if failure else None
 
-                # NEW: extract constraint from failure
                 constraint = self.constraint_extractor.extract(step, failure)
-                generalized_constraint = None
 
                 if constraint:
                     generalized_constraint = self.constraint_generalizer.generalize(constraint)
