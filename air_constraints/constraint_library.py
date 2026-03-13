@@ -48,3 +48,18 @@ class ConstraintLibrary:
                     break
 
         return matches
+
+    def get_statistics(self):
+        statistics = {}
+
+        for constraint in self.constraints:
+            if not isinstance(constraint, dict):
+                continue
+
+            required_relation = constraint.get("required_relation")
+            if required_relation is None:
+                continue
+
+            statistics[required_relation] = statistics.get(required_relation, 0) + 1
+
+        return statistics
