@@ -81,6 +81,7 @@ class AIRExecutor:
 
                 # NEW: extract constraint from failure
                 constraint = self.constraint_extractor.extract(step, failure)
+                generalized_constraint = None
 
                 if constraint:
                     generalized_constraint = self.constraint_generalizer.generalize(constraint)
