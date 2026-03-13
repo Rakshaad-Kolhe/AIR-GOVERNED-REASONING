@@ -1,6 +1,11 @@
-﻿class ConstraintLibrary:
+class ConstraintLibrary:
     def __init__(self):
         self.constraints = []
+        self.hierarchy = {
+            "hypertension": "medical_condition",
+            "smoking": "risk_factor",
+            "aspirin": "medication",
+        }
 
     def add(self, constraint):
         if constraint is not None:
@@ -19,7 +24,8 @@
                 constraint_premises = constraint.get("premises") or []
 
             for premise in input_premises:
-                if premise in constraint_premises:
+                generalized_premise = self.hierarchy.get(premise)
+                if premise in constraint_premises or generalized_premise in constraint_premises:
                     matches.append(constraint)
                     break
 
