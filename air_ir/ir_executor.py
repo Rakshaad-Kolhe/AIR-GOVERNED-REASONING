@@ -6,6 +6,7 @@ from air_trace.trace_graph import TraceGraph
 # NEW IMPORTS
 from air_constraints.constraint_library import ConstraintLibrary
 from air_constraints.constraint_extractor import ConstraintExtractor
+from air_constraints.constraint_generalizer import ConstraintGeneralizer
 
 
 class AIRExecutor:
@@ -18,6 +19,7 @@ class AIRExecutor:
         # NEW COMPONENTS
         self.constraint_library = ConstraintLibrary()
         self.constraint_extractor = ConstraintExtractor()
+        self.constraint_generalizer = ConstraintGeneralizer()
 
     def execute(self, kb, steps):
         self.trace_graph = TraceGraph()
@@ -81,7 +83,10 @@ class AIRExecutor:
                 constraint = self.constraint_extractor.extract(step, failure)
 
                 if constraint:
-                    self.constraint_library.add(constraint)
+                    generalized_constraint = self.constraint_generalizer.generalize(constraint)
+
+                    if generalized_constraint:
+                        self.constraint_library.add(generalized_constraint)
 
                 return {
                     "status": result.get("status"),
