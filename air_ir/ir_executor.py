@@ -7,6 +7,7 @@ from air_trace.trace_graph import TraceGraph
 from air_constraints.constraint_library import ConstraintLibrary
 from air_constraints.constraint_extractor import ConstraintExtractor
 from air_constraints.constraint_generalizer import ConstraintGeneralizer
+from air_constraints.admissibility_checker import AdmissibilityChecker
 
 
 class AIRExecutor:
@@ -20,6 +21,7 @@ class AIRExecutor:
         self.constraint_library = ConstraintLibrary()
         self.constraint_extractor = ConstraintExtractor()
         self.constraint_generalizer = ConstraintGeneralizer()
+        self.admissibility_checker = AdmissibilityChecker()
 
     def execute(self, kb, steps):
         self.trace_graph = TraceGraph()
@@ -60,7 +62,25 @@ class AIRExecutor:
                     "repair": None,
                     "reasoning_trace": self.trace_graph.get_trace(),
                 }
-                
+
+            if not self.admissibility_checker.check(step, kb):
+                result = {
+                    "status": "REJECT",
+                    "rule": step.operator,
+                    "reason": "inadmissible_reasoning",
+                }
+
+                self.trace_graph.add_step(step, result)
+
+                return {
+                    "status": "REJECT",
+                    "rule": step.operator,
+                    "steps_evaluated": steps_evaluated,
+                    "failure": {"error_type": "inadmissible_reasoning"},
+                    "repair": None,
+                    "reasoning_trace": self.trace_graph.get_trace(),
+                }
+
             rule = step.to_rule()
 
             result = self.engine.evaluate(kb, [rule])
