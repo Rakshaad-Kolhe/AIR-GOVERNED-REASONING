@@ -114,7 +114,6 @@ class AIRExecutor:
 
             steps_evaluated += 1
             final_result = result
-git 
             if result.get("status") == "ACCEPT" and getattr(step, "conclusion", None):
                 kb.add_fact(step.conclusion, source="inference")
 
