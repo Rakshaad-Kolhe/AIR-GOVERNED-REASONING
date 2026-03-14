@@ -1,0 +1,461 @@
+{
+  "run_id": 6,
+  "timestamp": "2026-03-14T11:12:51.342773",
+  "scenarios_tested": 10,
+  "baseline_results": {
+    "scenario_1": {
+      "name": "Missing Premise Trap",
+      "status": "ACCEPT",
+      "note": "baseline always accepts"
+    },
+    "scenario_2": {
+      "name": "Invalid Rule Application",
+      "status": "ACCEPT",
+      "note": "baseline always accepts"
+    },
+    "scenario_3": {
+      "name": "Conflicting Rules",
+      "status": "ACCEPT",
+      "note": "baseline always accepts"
+    },
+    "scenario_4": {
+      "name": "Unsupported Inference",
+      "status": "ACCEPT",
+      "note": "baseline always accepts"
+    },
+    "scenario_5": {
+      "name": "Policy Violation",
+      "status": "ACCEPT",
+      "note": "baseline always accepts"
+    },
+    "scenario_6": {
+      "name": "Circular Reasoning",
+      "status": "ACCEPT",
+      "note": "baseline always accepts"
+    },
+    "scenario_7": {
+      "name": "Missing Evidence",
+      "status": "ACCEPT",
+      "note": "baseline always accepts"
+    },
+    "scenario_8": {
+      "name": "Overgeneralization",
+      "status": "ACCEPT",
+      "note": "baseline always accepts"
+    },
+    "scenario_9": {
+      "name": "Contradictory Premises",
+      "status": "ACCEPT",
+      "note": "baseline always accepts"
+    },
+    "scenario_10": {
+      "name": "Hallucinated Rule",
+      "status": "ACCEPT",
+      "note": "baseline always accepts"
+    }
+  },
+  "air_results": {
+    "scenario_1": {
+      "name": "Missing Premise Trap",
+      "status": "REJECT",
+      "rule": "prescribe_beta_blockers",
+      "steps_evaluated": 1,
+      "failure": {
+        "error_type": "constraint_violation"
+      },
+      "repair_suggestion": null
+    },
+    "scenario_2": {
+      "name": "Invalid Rule Application",
+      "status": "REJECT",
+      "rule": "smoking_always_causes_cancer",
+      "steps_evaluated": 1,
+      "failure": {
+        "error_type": "constraint_violation"
+      },
+      "repair_suggestion": null
+    },
+    "scenario_3": {
+      "name": "Conflicting Rules",
+      "status": "REJECT",
+      "rule": "aspirin_always_prescribed",
+      "steps_evaluated": 1,
+      "failure": {
+        "error_type": "constraint_violation"
+      },
+      "repair_suggestion": null
+    },
+    "scenario_4": {
+      "name": "Unsupported Inference",
+      "status": "REJECT",
+      "rule": "generalize_to_all_patients",
+      "steps_evaluated": 1,
+      "failure": {
+        "error_type": "constraint_violation"
+      },
+      "repair_suggestion": null
+    },
+    "scenario_5": {
+      "name": "Policy Violation",
+      "status": "REJECT",
+      "rule": "share_medical_record_publicly",
+      "steps_evaluated": 1,
+      "failure": {
+        "error_type": "constraint_violation"
+      },
+      "repair_suggestion": null
+    },
+    "scenario_6": {
+      "name": "Circular Reasoning",
+      "status": "REJECT",
+      "rule": "effectiveness_implies_works",
+      "steps_evaluated": 1,
+      "failure": {
+        "error_type": "constraint_violation"
+      },
+      "repair_suggestion": null
+    },
+    "scenario_7": {
+      "name": "Missing Evidence",
+      "status": "REJECT",
+      "rule": "popularity_implies_efficacy",
+      "steps_evaluated": 1,
+      "failure": {
+        "error_type": "constraint_violation"
+      },
+      "repair_suggestion": null
+    },
+    "scenario_8": {
+      "name": "Overgeneralization",
+      "status": "REJECT",
+      "rule": "single_case_universal",
+      "steps_evaluated": 1,
+      "failure": {
+        "error_type": "constraint_violation"
+      },
+      "repair_suggestion": null
+    },
+    "scenario_9": {
+      "name": "Contradictory Premises",
+      "status": "REJECT",
+      "rule": "smoking_health_conclusion",
+      "steps_evaluated": 1,
+      "failure": {
+        "error_type": "constraint_violation"
+      },
+      "repair_suggestion": null
+    },
+    "scenario_10": {
+      "name": "Hallucinated Rule",
+      "status": "REJECT",
+      "rule": "lemon_water_cures_hypertension",
+      "steps_evaluated": 1,
+      "failure": {
+        "error_type": "constraint_violation"
+      },
+      "repair_suggestion": null
+    }
+  },
+  "reasoning_traces": [
+    {
+      "scenario_id": 1,
+      "scenario_name": "Missing Premise Trap",
+      "trace": [
+        {
+          "type": "constraint",
+          "constraints": [
+            {
+              "premises": [
+                "..."
+              ],
+              "operator": "prescribe_beta_blockers",
+              "required_relation": "inadmissible_reasoning"
+            }
+          ]
+        },
+        {
+          "step_id": "s1",
+          "premises": [
+            "..."
+          ],
+          "rule": "prescribe_beta_blockers",
+          "conclusion": "Prescribe beta blockers",
+          "status": "REJECT",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "scenario_id": 2,
+      "scenario_name": "Invalid Rule Application",
+      "trace": [
+        {
+          "type": "constraint",
+          "constraints": [
+            {
+              "premises": [
+                "..."
+              ],
+              "operator": "prescribe_beta_blockers",
+              "required_relation": "inadmissible_reasoning"
+            }
+          ]
+        },
+        {
+          "step_id": "s1",
+          "premises": [
+            "..."
+          ],
+          "rule": "smoking_always_causes_cancer",
+          "conclusion": "Smoking always causes lung cancer",
+          "status": "REJECT",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "scenario_id": 3,
+      "scenario_name": "Conflicting Rules",
+      "trace": [
+        {
+          "type": "constraint",
+          "constraints": [
+            {
+              "premises": [
+                "..."
+              ],
+              "operator": "prescribe_beta_blockers",
+              "required_relation": "inadmissible_reasoning"
+            }
+          ]
+        },
+        {
+          "step_id": "s1",
+          "premises": [
+            "Aspirin increases bleeding risk",
+            "..."
+          ],
+          "rule": "aspirin_always_prescribed",
+          "conclusion": "Aspirin should always be prescribed",
+          "status": "REJECT",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "scenario_id": 4,
+      "scenario_name": "Unsupported Inference",
+      "trace": [
+        {
+          "type": "constraint",
+          "constraints": [
+            {
+              "premises": [
+                "..."
+              ],
+              "operator": "prescribe_beta_blockers",
+              "required_relation": "inadmissible_reasoning"
+            }
+          ]
+        },
+        {
+          "step_id": "s1",
+          "premises": [
+            "..."
+          ],
+          "rule": "generalize_to_all_patients",
+          "conclusion": "All patients should take aspirin",
+          "status": "REJECT",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "scenario_id": 5,
+      "scenario_name": "Policy Violation",
+      "trace": [
+        {
+          "type": "constraint",
+          "constraints": [
+            {
+              "premises": [
+                "..."
+              ],
+              "operator": "prescribe_beta_blockers",
+              "required_relation": "inadmissible_reasoning"
+            }
+          ]
+        },
+        {
+          "step_id": "s1",
+          "premises": [
+            "..."
+          ],
+          "rule": "share_medical_record_publicly",
+          "conclusion": "Share patient medical record publicly",
+          "status": "REJECT",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "scenario_id": 6,
+      "scenario_name": "Circular Reasoning",
+      "trace": [
+        {
+          "type": "constraint",
+          "constraints": [
+            {
+              "premises": [
+                "..."
+              ],
+              "operator": "prescribe_beta_blockers",
+              "required_relation": "inadmissible_reasoning"
+            }
+          ]
+        },
+        {
+          "step_id": "s1",
+          "premises": [
+            "..."
+          ],
+          "rule": "effectiveness_implies_works",
+          "conclusion": "Therefore it works",
+          "status": "REJECT",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "scenario_id": 7,
+      "scenario_name": "Missing Evidence",
+      "trace": [
+        {
+          "type": "constraint",
+          "constraints": [
+            {
+              "premises": [
+                "..."
+              ],
+              "operator": "prescribe_beta_blockers",
+              "required_relation": "inadmissible_reasoning"
+            }
+          ]
+        },
+        {
+          "step_id": "s1",
+          "premises": [
+            "..."
+          ],
+          "rule": "popularity_implies_efficacy",
+          "conclusion": "Drug X is medically effective",
+          "status": "REJECT",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "scenario_id": 8,
+      "scenario_name": "Overgeneralization",
+      "trace": [
+        {
+          "type": "constraint",
+          "constraints": [
+            {
+              "premises": [
+                "..."
+              ],
+              "operator": "prescribe_beta_blockers",
+              "required_relation": "inadmissible_reasoning"
+            }
+          ]
+        },
+        {
+          "step_id": "s1",
+          "premises": [
+            "..."
+          ],
+          "rule": "single_case_universal",
+          "conclusion": "Treatment always works",
+          "status": "REJECT",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "scenario_id": 9,
+      "scenario_name": "Contradictory Premises",
+      "trace": [
+        {
+          "type": "constraint",
+          "constraints": [
+            {
+              "premises": [
+                "..."
+              ],
+              "operator": "prescribe_beta_blockers",
+              "required_relation": "inadmissible_reasoning"
+            }
+          ]
+        },
+        {
+          "step_id": "s1",
+          "premises": [
+            "Smoking damages lungs",
+            "..."
+          ],
+          "rule": "smoking_health_conclusion",
+          "conclusion": "Smoking is healthy",
+          "status": "REJECT",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "scenario_id": 10,
+      "scenario_name": "Hallucinated Rule",
+      "trace": [
+        {
+          "type": "constraint",
+          "constraints": [
+            {
+              "premises": [
+                "..."
+              ],
+              "operator": "prescribe_beta_blockers",
+              "required_relation": "inadmissible_reasoning"
+            }
+          ]
+        },
+        {
+          "step_id": "s1",
+          "premises": [
+            "..."
+          ],
+          "rule": "lemon_water_cures_hypertension",
+          "conclusion": "Drink lemon water to cure hypertension",
+          "status": "REJECT",
+          "failure": null
+        }
+      ]
+    }
+  ],
+  "learned_constraints": [
+    {
+      "premises": [
+        "..."
+      ],
+      "operator": "prescribe_beta_blockers",
+      "required_relation": "inadmissible_reasoning"
+    }
+  ],
+  "constraint_statistics": {
+    "inadmissible_reasoning": 1
+  },
+  "failures_detected": 10,
+  "constraints_learned": 1,
+  "newly_learned_this_run": 0,
+  "air_accept": 0,
+  "air_reject": 10,
+  "air_suspend": 0
+}

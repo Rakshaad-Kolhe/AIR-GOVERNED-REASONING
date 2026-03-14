@@ -1,0 +1,245 @@
+{
+  "experiment_meta": {
+    "generated_at": "2026-03-14T11:12:51.406453",
+    "total_runs": 30,
+    "scenarios_per_run": 10,
+    "total_scenarios_tested": 300
+  },
+  "acceptance_rates": {
+    "baseline_accept_rate_pct": 100.0,
+    "air_accept_rate_pct": 0.0,
+    "air_reject_rate_pct": 100.0,
+    "air_suspend_rate_pct": 0.0
+  },
+  "counts": {
+    "baseline_accept": 300,
+    "air_accept": 0,
+    "air_reject": 300,
+    "air_suspend": 0
+  },
+  "most_common_reasoning_failures": [
+    {
+      "failure_type": "constraint_violation",
+      "count": 300
+    }
+  ],
+  "most_learned_constraints": [
+    {
+      "required_relation": "inadmissible_reasoning",
+      "count": 1
+    }
+  ],
+  "total_constraints_in_library": 1,
+  "learning_curve": [
+    {
+      "run": 1,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 1,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 2,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 3,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 4,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 5,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 6,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 7,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 8,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 9,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 10,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 11,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 12,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 13,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 14,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 15,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 16,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 17,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 18,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 19,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 20,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 21,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 22,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 23,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 24,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 25,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 26,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 27,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 28,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 29,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    },
+    {
+      "run": 30,
+      "failures_detected": 10,
+      "constraints_learned": 1,
+      "newly_learned_this_run": 0,
+      "constraint_violations_blocked": 10
+    }
+  ]
+}
